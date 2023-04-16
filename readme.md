@@ -50,16 +50,20 @@ At the interview you will be asked to present an end-to-end demo of the applicat
 
 ==================================
 
-# test input:
+# API
 
-## market data
+## upload market data
 
-API: 
+### Purpose
 
+Upload and save (realworld) underlying market data in Azure storage. They can come from internal/external market data provider. 
+
+### Address:
 
 [https://ffqserver.azurewebsites.net/api/orchestrators/ffq_test2/upload_market_data](https://ffqserver.azurewebsites.net/api/orchestrators/ffq_test2/upload_market_data)
 
-Body:
+### Body example:
+
 ```json
 
 [
@@ -86,17 +90,25 @@ Body:
 ]
 
 ```
+## Reply:
 
+Azure durable function standard output, use link after "statusQueryGetUri" to see the upload result.
 
+### Note: 
+
+Data will stored in Azure storage in the format marketdata/{Instrument}/{Time}.
 
 ## test input calibration data
 
+### Purpose
 
-API: 
+Upload and save (semi-static) calibration data in Azure storage. They can come from internal/external calibration engine. 
+
+### Address:
 
 [https://ffqserver.azurewebsites.net/api/orchestrators/ffq_test2/upload_calibration_data](https://ffqserver.azurewebsites.net/api/orchestrators/ffq_test2/upload_calibration_data)
 
-Body:
+### Body example:
 
 ```json
 
@@ -106,19 +118,30 @@ Body:
     "Time": "20230414T120000",
     "calibration": {
       "Risk-Free Rate": 0.02,
-      "dividend/carry on cost": -0.01
     }
   }
 ]
 ```
 
+## Reply:
+
+Azure durable function standard output, use link after "statusQueryGetUri" to see the upload result.
+
+### Note: 
+
+Data will stored in Azure storage in the format marketdata/{scenario}/{Time}.
+
 ## test input contract 
 
-API: 
+### Purpose
+
+Upload and save option contract to be priced in Azure storage. Then a pricer (Black76) is used to price the option PV and retured in the API 
+
+### Address:
 
 [https://ffqserver.azurewebsites.net/api/orchestrators/ffq_test2/upload_contract_and_run](https://ffqserver.azurewebsites.net/api/orchestrators/ffq_test2/upload_contract_and_run)
 
-Body:
+### Body example:
 
 ``` json
 
@@ -146,14 +169,14 @@ Body:
 ]
 ```
 
-## test output
+## Reply:
 
-click the "statusQueryGetUri" in the reply of the contract upload API
+Azure durable function standard output, use link after "statusQueryGetUri" to see the calculation result.
+
 i.e. 
-[https://ffqserver.azurewebsites.net/runtime/webhooks/durabletask/instances/86f3df8e146948a796e766ac80e33db8?taskHub=FFQServer&connection=Storage&code=t8OJTK-yGKzDhavW4PwvQ4TqKd2rQh95Ke8FOt_7OxBTAzFu2nN3hw==](https://ffqserver.azurewebsites.net/runtime/webhooks/durabletask/instances/86f3df8e146948a796e766ac80e33db8?taskHub=FFQServer&connection=Storage&code=t8OJTK-yGKzDhavW4PwvQ4TqKd2rQh95Ke8FOt_7OxBTAzFu2nN3hw==)
+[https://ffqserver.azurewebsites.net/runtime/webhooks/durabletask/instances/dfe8e8a415a24ee1abdff0ec2d3e3ee1?taskHub=FFQServer&connection=Storage&code=t8OJTK-yGKzDhavW4PwvQ4TqKd2rQh95Ke8FOt_7OxBTAzFu2nN3hw==](https://ffqserver.azurewebsites.net/runtime/webhooks/durabletask/instances/dfe8e8a415a24ee1abdff0ec2d3e3ee1?taskHub=FFQServer&connection=Storage&code=t8OJTK-yGKzDhavW4PwvQ4TqKd2rQh95Ke8FOt_7OxBTAzFu2nN3hw==)
 
-
-including used contract, marketdata and calibration data inputs
+In the body of the output, all used inputs and calculated results are displayed.
 
 ```json 
 [
@@ -175,7 +198,6 @@ including used contract, marketdata and calibration data inputs
     },
     "calibration_data": {
       "Risk-Free Rate": 0.02,
-      "dividend/carry on cost": -0.01,
       "Volatility": 0.15
     },
     "Call": 7.351903116724757,
@@ -199,7 +221,6 @@ including used contract, marketdata and calibration data inputs
     },
     "calibration_data": {
       "Risk-Free Rate": 0.02,
-      "dividend/carry on cost": -0.01,
       "Volatility": 0.15
     },
     "Call": 4.203983788652218,
@@ -207,3 +228,8 @@ including used contract, marketdata and calibration data inputs
   }
 ]
 ```
+
+
+### Note: 
+
+Contact data will stored in Azure storage in the format marketdata/{Instrument}/{Time}.

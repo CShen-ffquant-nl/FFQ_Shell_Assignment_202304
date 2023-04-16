@@ -1,3 +1,8 @@
+'''
+Test class for src/main.py
+
+'''
+
 from src.main import calculate_main, upload_calib_data, upload_mkt_data
 from src.utilities.azure_blob_helper import BlobHelper
 from pytest import MonkeyPatch, fail

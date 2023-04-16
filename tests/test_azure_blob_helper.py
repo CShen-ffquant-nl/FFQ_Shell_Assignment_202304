@@ -1,3 +1,10 @@
+"""
+Test class for src/utilities/azure_blob_helper.py
+
+NOTE: An Azure storage account connection string is needed and hardcoded in the test.
+
+"""
+
 from src.utilities.azure_blob_helper import BlobHelper
 from pytest import MonkeyPatch, fail
 import pytest
