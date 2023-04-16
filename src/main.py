@@ -103,7 +103,7 @@ def calculate_main(input: tuple[dict, str]) -> dict:
                 input["Volatility"],
             )
 
-            aContract["market_data"] = market_data
+            aContract["underlying market_data"] = market_data
             aContract["calibration_data"] = calib_data
             aContract["Call"] = call
             aContract["Put"] = put

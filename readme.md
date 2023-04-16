@@ -191,7 +191,7 @@ In the body of the output, all used inputs and calculated results are displayed.
       "scenario": "scenario-1",
       "pricing date": "2023-1-1"
     },
-    "market_data": {
+    "underlying market_data": {
       "future price": {
         "2023-02-28": 102.0,
         "2023-11-30": 103.0
@@ -214,7 +214,7 @@ In the body of the output, all used inputs and calculated results are displayed.
       "scenario": "scenario-1",
       "pricing date": "2023-1-1"
     },
-    "market_data": {
+    "underlying market_data": {
       "future price": {
         "2023-02-1": 102.0,
         "2023-02-28": 103.0
