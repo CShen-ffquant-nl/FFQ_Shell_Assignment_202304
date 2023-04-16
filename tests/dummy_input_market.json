@@ -1,0 +1,22 @@
+[
+  {
+    "Instrument": "ICE Brent Jan-24 Future",
+    "Time": "20230414T120000",
+    "marketData": {
+      "future price": {
+        "2023-02-28": 102.0,
+        "2023-11-30": 103.0
+      }
+    }
+  },
+  {
+    "Instrument": "Henry Hub Gas March 24 Future",
+    "Time": "20230414T120000",
+    "marketData": {
+      "future price": {
+        "2023-02-1": 102.0,
+        "2023-02-28": 103.0
+      }
+    }
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "Contract": "BRN Jan24 Call Strike 100 USD-BBL ",
+    "Time": "20230414T120000",
+    "contractData": {
+      "Underlying": "ICE Brent Jan-24 Future",
+      "strike": 100.0,
+      "expire date": "2023-11-30",
+      "scenario": "scenario-1",
+      "pricing date": "2023-1-1"
+    },
+    "market_data": {
+      "future price": {
+        "2023-02-28": 102.0,
+        "2023-11-30": 103.0
+      }
+    },
+    "calibration_data": {
+      "Risk-Free Rate": 0.02,
+      "dividend/carry on cost": -0.01,
+      "Volatility": 0.15
+    },
+    "Call": 7.351903116724757,
+    "Put": 4.379148506992727
+  },
+  {
+    "Contract": "HH Mar24 Put Strike 10 USD-MMBTu ",
+    "Time": "20230414T120000",
+    "contractData": {
+      "Underlying": "Henry Hub Gas March 24 Future",
+      "strike": 100.0,
+      "expire date": "2023-02-28",
+      "scenario": "scenario-1",
+      "pricing date": "2023-1-1"
+    },
+    "market_data": {
+      "future price": {
+        "2023-02-1": 102.0,
+        "2023-02-28": 103.0
+      }
+    },
+    "calibration_data": {
+      "Risk-Free Rate": 0.02,
+      "dividend/carry on cost": -0.01,
+      "Volatility": 0.15
+    },
+    "Call": 4.203983788652218,
+    "Put": 1.2087471263678842
+  }
+]

@@ -1,0 +1,29 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Attach to Python Functions",
+            "type": "python",
+            "request": "attach",
+            "port": 9091,
+            "preLaunchTask": "func: host start",  
+        },
+
+        {
+        "name": "Python: Current File",
+        "type": "python",
+        "request": "test",  // <----- this is for tests
+        "console": "integratedTerminal"
+        }
+
+        ,
+        {
+            "name": "Attach to Python Functions all",
+            "type": "python",
+            "request": "attach",
+            "port": 9091,
+            "preLaunchTask": "func: host start",  
+            "justMyCode": false
+        }
+    ]
+}
