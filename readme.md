@@ -144,27 +144,28 @@ Upload and save option contract to be priced in Azure storage. Then a pricer (Bl
 ### Body example:
 
 ``` json
-
 [
   {
-    "Instrument": "BRN Jan24 Call Strike 100 USD/BBL ",
+    "Contract": "BRN Jan24 Call Strike 100 USD-BBL ",
     "Time": "20230414T120000",
     "contractData": {
       "Underlying": "ICE Brent Jan-24 Future",
       "strike": 100.0,
-      "expire date": "2023-11-30"
-    },
-      "scenario": "scenario-1"
+      "expire date": "2023-11-30",
+      "scenario": "scenario-1",
+      "pricing date": "2023-1-1"
+    }
   },
   {
-    "Instrument": "HH Mar24 Put Strike 10 USD/MMBTu ",
+    "Contract": "HH Mar24 Put Strike 10 USD-MMBTu ",
     "Time": "20230414T120000",
     "contractData": {
       "Underlying": "Henry Hub Gas March 24 Future",
       "strike": 100.0,
-      "expire date": "2023-02-29"      
-    },
-      "scenario": "scenario-1"
+      "expire date": "2023-02-28" ,
+      "scenario": "scenario-1",
+      "pricing date": "2023-1-1"     
+    }
   }
 ]
 ```
