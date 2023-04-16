@@ -3,8 +3,7 @@
     "scenario": "scenario-1",
     "Time": "20230414T120000",
     "calibration": {
-      "Risk-Free Rate": 0.02,
-      "dividend/carry on cost": -0.01,
+      "Risk-Free Rate": 0.01,
       "Volatility": 0.15
     }
   }

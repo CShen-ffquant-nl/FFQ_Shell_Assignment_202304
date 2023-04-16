@@ -69,7 +69,7 @@ def calculate_main(input: tuple[dict, str]) -> dict:
             input=contract_data|market_data|calib_data
         
             # here is calculation
-            model=Pricer_Black76(datetime.strptime(input["expire date"],"%Y-%m-%d"),input["Risk-Free Rate"]+input["dividend/carry on cost"],input["strike"])
+            model=Pricer_Black76(datetime.strptime(input["expire date"],"%Y-%m-%d"),input["Risk-Free Rate"],input["strike"])
 
             #NOTE: if the future price at expire date is not avaiable, exception will be thrown
             call,put =model.PV(datetime.strptime(input["pricing date"],"%Y-%m-%d"),input["future price"].get(input["expire date"]), input["Volatility"])
