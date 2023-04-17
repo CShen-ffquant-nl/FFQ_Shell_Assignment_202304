@@ -7,7 +7,7 @@ NOTE the functions may be called by name in function_app.py. so be careful when 
 from datetime import datetime
 from .utilities.azure_blob_helper import BlobHelper
 import json
-from src.pricer.pricer_Black76 import Pricer_Black76
+from src.pricer.pricer_BlackScholes import Pricer_BS
 import logging
 
 """
@@ -92,7 +92,7 @@ def calculate_main(input: tuple[dict, str]) -> dict:
             input = contract_data | market_data | calib_data
 
             # here is calculation
-            model = Pricer_Black76(
+            model = Pricer_BS(
                 datetime.strptime(input["expire date"], "%Y-%m-%d"), input["Risk-Free Rate"], input["strike"]
             )
 
