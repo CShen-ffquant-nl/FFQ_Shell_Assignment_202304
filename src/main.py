@@ -65,6 +65,7 @@ def calculate_main(input: tuple[dict, str]) -> dict:
         # run_id = input[1]
 
         # prepare result
+        # NOTE：input will be updated in later code together with output. In this case, we dont care.Otherwise a copy() or deepcopy() will be needed
         output = input[0]
 
         for aContract in output:
@@ -89,18 +90,18 @@ def calculate_main(input: tuple[dict, str]) -> dict:
             calib_data = json.loads(blob_helper.download("calibrationdata", filename).replace("'", '"'))
 
             # merge all
-            input = contract_data | market_data | calib_data
+            input_all = contract_data | market_data | calib_data
 
             # here is calculation
             model = Pricer_BS(
-                datetime.strptime(input["expire date"], "%Y-%m-%d"), input["Risk-Free Rate"], input["strike"]
+                datetime.strptime(input_all["expire date"], "%Y-%m-%d"), input_all["Risk-Free Rate"], input_all["strike"]
             )
 
             # NOTE: if the future price at expire date is not avaiable, exception will be thrown
             call, put = model.PV(
-                datetime.strptime(input["pricing date"], "%Y-%m-%d"),
-                input["future price"].get(input["expire date"]),
-                input["Volatility"],
+                datetime.strptime(input_all["pricing date"], "%Y-%m-%d"),
+                input_all["future price"].get(input_all["expire date"]),
+                input_all["Volatility"],
             )
 
             aContract["underlying market_data"] = market_data
