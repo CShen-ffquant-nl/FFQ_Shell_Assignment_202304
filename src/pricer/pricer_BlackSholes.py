@@ -1,7 +1,7 @@
 """
 Option Pricer engine based on Black 76 model
 reference: https://en.wikipedia.org/wiki/Black_model
-Note: Black76 model, use future price
+Note: BlackScholes model, use spot price with dividend included
 
 """
 import datetime
@@ -10,7 +10,7 @@ from scipy.stats import norm
 from scipy.optimize import brentq
 
 
-class Pricer_Black76:
+class Pricer_BS:
     '''
     init model with contract paramters and calibrated values
     '''
@@ -21,25 +21,24 @@ class Pricer_Black76:
         self._strike = strike
         self._dividend=dividend
 
-        pass
 
     '''
-    return both call and put option present value based on price(as-of) date,  future price and (implied) volatility
+    return both call and put option present value based on price(as-of) date,  spot price and (implied) volatility
     '''
-    def PV(self, price_date: datetime, future: float, volality: float):
+    def PV(self, price_date: datetime, spot: float, volality: float):
 
         t = (self._maturity_date - price_date).days / 365  # act/365 with no holiday
 
-        d1 = (np.log(future/self._strike) + (volality**2 / 2-self._dividend) * t) / (volality * np.sqrt(t))
+        d1 = (np.log(spot/self._strike) + t*(self._rf - self._dividend + volality**2 / 2))  / (volality * np.sqrt(t))
         d2 = d1 - (volality * np.sqrt(t))
 
-        call = np.exp(-(self._rf +self._dividend) * t) * future * norm.cdf(d1) - np.exp(-self._rf * t) *self._strike * norm.cdf(d2)
-        put = np.exp(-self._rf * t) *self._strike * norm.cdf(-d2) - np.exp(-(self._rf+self._dividend) * t) *future * norm.cdf(-d1)
+        call = spot*np.exp(-self._dividend * t) * norm.cdf(d1) - self._strike * np.exp(-self._rf * t) *norm.cdf(d2)
+        put = self._strike *np.exp(-self._rf * t) *  norm.cdf(-d2) - np.exp(-self._dividend * t) *spot *  norm.cdf(-d1)
 
         return (call, put)
 
     '''
-    return implied volality from either call or put option based on price(as-of) date,  future price and market price of option
+    return implied volality from either call or put option based on price(as-of) date,  spot price and market price of option
     '''
     def implied_vol(self, price_date: datetime, future: float, option: float, use_call: bool = True):
 

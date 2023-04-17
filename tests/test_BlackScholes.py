@@ -1,10 +1,10 @@
 """
-Test class for src/pricer/pricer_Black76.py
+Test class for src/pricer/pricer_BlackScholes.py
 """
 import datetime
 from pytest import fail
 import pytest
-from src.pricer.pricer_Black76 import Pricer_Black76
+from src.pricer.pricer_BlackSholes import Pricer_BS
 import numpy as np
 
 
@@ -24,11 +24,11 @@ def setting():
     return input
 
 
-class Test_Black76:
-    def test_Black76_PV(self, setting):
+class Test_BS:
+    def test_BS_PV(self, setting):
         try:
-            black76 = Pricer_Black76(setting["maturity"], setting["rf"], setting["strike"], setting["dividend"])
-            call, put = black76.PV(setting["price_date"], setting["future"], setting["vol"])
+            Pricer = Pricer_BS(setting["maturity"], setting["rf"], setting["strike"],setting["dividend"])
+            call, put = Pricer.PV(setting["price_date"], setting["spot"], setting["vol"])
 
             assert np.abs(call - setting["call"]) < 1e-6
             assert np.abs(put - setting["put"]) < 1e-6
@@ -36,10 +36,10 @@ class Test_Black76:
         except Exception as e:
             fail(str(e))
 
-    def test_Black76_Implied_Vol(self, setting):
+    def test_BS_Implied_Vol(self, setting):
         try:
-            black76 = Pricer_Black76(setting["maturity"], setting["rf"], setting["strike"], setting["dividend"])
-            vol = black76.implied_vol(setting["price_date"], setting["future"], setting["put"], False)
+            Pricer = Pricer_BS(setting["maturity"], setting["rf"], setting["strike"],setting["dividend"])
+            vol = Pricer.implied_vol(setting["price_date"], setting["spot"], setting["put"], False)
 
             assert np.abs(vol - setting["vol"]) < 1e-6
 
